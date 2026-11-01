@@ -238,26 +238,37 @@ else:
 # 4. 绘制2022—2500年年度平均气温曲线
 # ============================================================
 
-plt.figure(figsize=(15, 6))
+plt.figure(figsize=(16, 7), dpi=120)
 
-# SARIMA年度平均气温曲线
 plt.plot(
     annual_mean.index,
     annual_mean.values,
-    linewidth=2,
+    linewidth=2.5,
     linestyle="-",
     marker="o",
-    markersize=3,
+    markersize=4,
     label="SARIMA Annual Mean Temperature"
 )
 
-# 20°C水平参考线
+# 20°C水平参考线（标签里带上阈值数值）
 plt.axhline(
     y=threshold,
     color="red",
     linestyle="--",
-    linewidth=1.5,
-    label="20°C Threshold"
+    linewidth=2,
+    label=f"{threshold}°C Threshold"
+)
+
+# 阈值右侧文字标注，防止和图例挤在一起
+plt.text(
+    pd.Timestamp("2500-12-31"),
+    threshold + 0.02,
+    f"Threshold = {threshold} °C",
+    ha="right",
+    va="bottom",
+    fontsize=12,
+    fontweight="bold",
+    color="red"
 )
 
 # ============================================================
@@ -272,43 +283,70 @@ if exceed_year is not None:
         x=exceed_x,
         color="red",
         linestyle=":",
-        linewidth=2,
+        linewidth=2.2,
+        alpha=0.85,
         label=f"First Exceedance: {exceed_year}"
     )
 
-    # 标记首次超过20°C的点
+    # 标记首次超过20°C的点（加大、白边，更醒目）
     plt.scatter(
         exceed_x,
         exceed_temperature,
         color="red",
-        s=70,
-        zorder=5
+        s=150,
+        edgecolors="white",
+        linewidths=1.8,
+        zorder=6,
+        label="First Point Above Threshold"
     )
 
-    # 标注年份
+    # 根据点位在横轴左/右半区，自动决定标注方向，避免出界
+    mid_year = annual_mean.index[0] + (annual_mean.index[-1] - annual_mean.index[0]) / 2
+    if exceed_x <= mid_year:
+        offset, ha = (70, 60), "left"
+    else:
+        offset, ha = (-70, 60), "right"
+
     plt.annotate(
-        f"{exceed_year}\n{exceed_temperature:.2f} °C",
+        f"First exceedance\n{exceed_year}  |  {exceed_temperature:.2f} °C",
         xy=(exceed_x, exceed_temperature),
-        xytext=(12, 15),
+        xytext=offset,
         textcoords="offset points",
-        fontsize=10,
-        color="red",
+        fontsize=14,
+        fontweight="bold",
+        color="darkred",
+        ha=ha,
+        va="bottom",
+        bbox=dict(
+            boxstyle="round,pad=0.5",
+            facecolor="white",
+            edgecolor="red",
+            linewidth=1.6,
+            alpha=0.95
+        ),
         arrowprops=dict(
-            arrowstyle="->",
-            color="red"
-        )
+            arrowstyle="-|>",
+            color="red",
+            linewidth=2,
+            shrinkA=0,
+            shrinkB=8,
+            connectionstyle="arc3,rad=0.2"
+        ),
+        zorder=7
     )
 
 # ============================================================
 # 6. 图像设置
 # ============================================================
 
-plt.xlabel("Year", fontsize=12)
-plt.ylabel("Annual Mean Temperature (°C)", fontsize=12)
+plt.xlabel("Year", fontsize=14, fontweight="bold")
+plt.ylabel("Annual Mean Temperature (°C)", fontsize=14, fontweight="bold")
 
 plt.title(
     "SARIMA Predicted Annual Mean Temperature (2022–2500)",
-    fontsize=14
+    fontsize=17,
+    fontweight="bold",
+    pad=15
 )
 
 plt.xlim(
@@ -316,8 +354,24 @@ plt.xlim(
     pd.Timestamp("2500-12-31")
 )
 
-plt.grid(alpha=0.3)
-plt.legend(fontsize=10)
+plt.grid(alpha=0.3, linestyle="--")
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+
+plt.legend(
+    loc="upper left",
+    fontsize=13,              # 图例正文放大
+    title="Legend",
+    title_fontsize=14,        # 图例标题放大
+    frameon=True,
+    framealpha=0.95,
+    facecolor="white",
+    edgecolor="gray",
+    borderpad=1.0,
+    labelspacing=0.9,
+    handlelength=2.6,
+    markerscale=2.0           # 图例中的标记点放大
+)
 
 plt.tight_layout()
 
