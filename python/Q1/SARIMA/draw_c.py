@@ -310,7 +310,7 @@ if exceed_year is not None:
     plt.annotate(
         f"First exceedance\n{exceed_year}  |  {exceed_temperature:.2f} °C",
         xy=(exceed_x, exceed_temperature),
-        xytext=offset,
+        xytext=(-95, 70),
         textcoords="offset points",
         fontsize=14,
         fontweight="bold",
