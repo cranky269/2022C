@@ -1,0 +1,17 @@
+\subsubsection{评价流程}
+
+为衡量十年尺度上的气温变化，本文以相邻两个十年区间的平均气温之差作为评价指标。首先，设第 $y$ 年第 $m$ 月的全球平均气温为 $T_{y,m}$，则该年的平均气温为
+\begin{equation}
+    T_y=\frac{1}{12}\sum_{m=1}^{12}T_{y,m}.
+\end{equation}
+
+以2022年为分组终点，按十年为一个区间依次向前划分，得到2013---2022年、2003---2012年等区间。设第 $k$ 个完整十年区间为 $D_k$，各区间按时间先后排列，则区间平均气温为
+\begin{equation}
+    \overline{T}_k=\frac{1}{10}\sum_{y\in D_k}T_y.
+\end{equation}
+定义相邻区间的气温增幅为
+\begin{equation}
+    \Delta T_k=\overline{T}_k-\overline{T}_{k-1}.
+    \label{eq:q1a-decadal-increase}
+\end{equation}
+当 $\Delta T_k>0$ 时，说明该区间较前一个区间变暖；其数值越大，说明增温幅度越大。通过比较各区间的 $\Delta T_k$，判断最近十年区间的增幅是否为历史最高。
