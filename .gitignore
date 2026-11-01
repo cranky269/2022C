@@ -1,0 +1,26 @@
+.vscode/settings.json
+
+
+
+/data
+
+# other
+/mcp_filters
+/mcp使用注意事项
+/skill
+.mcp.json
+/node_modules
+/outputs
+/scripts
+/.codebuddy
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.toc
+*.bbl
+*.blg
