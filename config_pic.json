@@ -1,0 +1,37 @@
+{
+  "_说明": "全项目统一绘图配置（配色/字体/尺寸）。所有画图脚本都从这里取样式，不要在代码里硬编码颜色。",
+
+  "font_family": "Microsoft YaHei",
+  "font_size": 11,
+
+  "figure": {
+    "dpi": 300,
+    "figsize": [12.0, 4.8],
+    "facecolor": "#FFFFFF"
+  },
+
+  "palette": {
+    "primary": "#2E5E8E",
+    "secondary": "#C0504D",
+    "accent": "#4F9D69",
+    "warm": "#E08A3C",
+    "cool": "#5B8FA8",
+    "neutral": "#9A9A9A",
+    "grid": "#D5D5D5",
+    "text": "#262626"
+  },
+
+  "axes": {
+    "spines_top": false,
+    "spines_right": false,
+    "grid_alpha": 0.35,
+    "grid_linestyle": "-",
+    "labelsize": 11,
+    "titlesize": 12
+  },
+
+  "save": {
+    "bbox_inches": "tight",
+    "pad_inches": 0.05
+  }
+}

@@ -1,0 +1,9 @@
+# 2022 APMCM C 题 —— Python 依赖（已在 Python 3.13.2 上验证通过）
+# 安装：python -m pip install -r requirements.txt
+
+pandas==3.0.6        # 表格读写 / 分组聚合
+numpy==2.5.1         # 数值计算
+requests==2.34.2     # 调用 NASA POWER 接口
+scipy==1.18.1        # 统计检验 / 曲线拟合
+matplotlib==3.11.0   # 绘图
+openpyxl==3.1.5      # 导出 xlsx
